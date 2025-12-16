@@ -6,14 +6,14 @@ import { Injectable } from '@angular/core';
 })
 export class MensagemErroService {
 
-  constructor(private snackbar: MatSnackBar) { }
+  constructor(private snackBar: MatSnackBar) { }
 
   mostrarMensagemDeErro(mensagem: string) {
-    const config: MatSnackBarConfig ={
+    const config: MatSnackBarConfig = {
       duration: 3000,
       horizontalPosition: 'center',
       verticalPosition: 'top'
     }
-    this.snackbar.open(mensagem, 'Fechar', config);
+    this.snackBar.open(mensagem, 'Fechar', config)
   }
 }

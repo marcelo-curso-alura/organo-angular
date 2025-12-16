@@ -29,9 +29,9 @@ import { LivroService } from '../../services/livro.service';
   styleUrl: './formulario.component.css'
 })
 export class FormularioComponent implements OnInit, OnChanges {
+  livro = input<Livro | null>(null);
+  submitForm = output<Livro>();
 
-  livro = input<Livro | null>(null); 
-  submitForm = output<Livro>();  
   livroFormulario!: FormGroup;
   generos: GeneroLiterario[] = [];
 
@@ -45,8 +45,8 @@ export class FormularioComponent implements OnInit, OnChanges {
     this.inicializarlivroFormulario();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['livro'] && this.livro()) {
+  ngOnChanges(changes: SimpleChanges) {
+    if(changes['livro'] && this.livro()) {
       this.livroFormulario.patchValue({
         ...this.livro(),
         genero: this.livro()?.genero?.id || ""
@@ -63,14 +63,13 @@ export class FormularioComponent implements OnInit, OnChanges {
       genero: [''],
       imagem: ['']
     })
-  }
+  };
 
-  emitirLivroAtualizado(){
+  emitirLivroAtualizado() {
     const livroAtualizado: Livro = {
       ...this.livroFormulario.value,
       genero: this.generos.find(g => g.id === this.livroFormulario.value.genero)
     }
-    this.submitForm.emit(livroAtualizado);
+    this.submitForm.emit(livroAtualizado)
   }
-
 }

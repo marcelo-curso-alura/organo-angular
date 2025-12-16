@@ -4,14 +4,17 @@ import { MensagemErroService } from '../services/mensagem-erro.service';
 import { inject } from '@angular/core';
 
 export const erroInterceptor: HttpInterceptorFn = (req, next) => {
-  const mensagemErroService = inject(MensagemErroService);
+
+  const mensagemErroService = inject(MensagemErroService)
+
   return next(req).pipe(
     catchError((erro: HttpErrorResponse) => {
-      const mensagemErro = obterMensagemDeErro(erro.status);
-      mensagemErroService.mostrarMensagemDeErro(mensagemErro);
-      return throwError(() => erro);
+      const mensagemErro = obterMensagemDeErro(erro.status)
+      mensagemErroService.mostrarMensagemDeErro(mensagemErro)
+      return throwError(() => erro)
     })
   )
+};
 
 function obterMensagemDeErro(status: number): string {
   const mensagensDeErro: Record<number, string> = {
@@ -21,5 +24,3 @@ function obterMensagemDeErro(status: number): string {
   }
   return mensagensDeErro[status] || 'Ocorreu um erro inesperado'
 }
-
-};

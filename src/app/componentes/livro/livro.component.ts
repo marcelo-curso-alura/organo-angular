@@ -15,21 +15,22 @@ import { LivroService } from '../../services/livro.service';
   styleUrl: './livro.component.css'
 })
 export class LivroComponent {
-
   excluirLivro = output<string>();
   livro = input.required<Livro>();
 
-  constructor(private livroService: LivroService){}
+  constructor(private livroService: LivroService) {}
 
   alternarFavorito() {
-    const livroAtualizado = {...this.livro(), favorito: !this.livro().favorito};
+    const livroAtualizado = {...this.livro(), favorito: !this.livro().favorito}
+
     this.livroService.atualizarFavorito(livroAtualizado).subscribe(() => {
-      this.livro().favorito = livroAtualizado.favorito;
-    });
+      this.livro().favorito = livroAtualizado.favorito
+    })
+
   }
 
   excluir() {
-    this.excluirLivro.emit(this.livro().id);
+    this.excluirLivro.emit(this.livro().id)
   }
 
 }

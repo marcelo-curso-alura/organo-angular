@@ -27,7 +27,7 @@ import { LivroService } from '../../services/livro.service';
 export class ListaLivrosComponent implements OnInit {
   generosComLivros: { genero: GeneroLiterario; livros: Livro[] }[] = [];
 
-  constructor(private livroService: LivroService){}
+  constructor(private livroService: LivroService) { }
 
   ngOnInit() {
     this.livroService.organizarLivrosPorGenero().subscribe((livrosPorGenero) => {
@@ -35,10 +35,9 @@ export class ListaLivrosComponent implements OnInit {
         genero,
         livros: livrosPorGenero.get(genero.id) ?? []
       }));
-      
     });
   }
-  
+
   removerLivro(id: string) {
     this.livroService.excluirLivro(id).subscribe(() => {
       this.deletarLivroDaLista(id);
@@ -46,9 +45,9 @@ export class ListaLivrosComponent implements OnInit {
   }
 
   deletarLivroDaLista(livroId: string) {
-    this.generosComLivros = this.generosComLivros.map(({ genero, livros }) => ({
+    this.generosComLivros = this.generosComLivros.map(({ genero, livros}) => ({
       genero,
       livros: livros.filter(livro => livro.id !== livroId)
-    }));
+    }))
   }
 }

@@ -23,13 +23,13 @@ export class ListaSuspensaComponent implements ControlValueAccessor, OnInit {
   id = input<string>();
   opcoes: GeneroLiterario[] = [];
 
-  private innerValue: any;
-
   constructor(private livroService: LivroService) {}
 
-  ngOnInit(): void {
-    this.opcoes = this.livroService.generos;
+  ngOnInit() {
+    this.opcoes = this.livroService.generos
   }
+
+  private innerValue: any;
 
   get value() {
     return this.innerValue;
